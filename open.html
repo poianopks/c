@@ -1,0 +1,180 @@
+<!DOCTYPE html><html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Open Interpreter — 스마트폰(Acode) 따라하기</title>
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <meta name="description" content="왕초보용 Open Interpreter 설치 & 사용 안내 (모바일 친화, Acode 복사-붙여넣기용)" />
+  <style>
+    /* code block styling */
+    pre{white-space:pre-wrap; word-break:break-word}
+    .kbd{border:1px solid #e5e7eb; padding:.15rem .35rem; border-radius:.375rem; font-size:.85em; background:#f8fafc}
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+  <header class="px-4 sm:px-6 py-6 max-w-3xl mx-auto">
+    <h1 class="text-2xl sm:text-3xl font-bold tracking-tight">📘 Open Interpreter — 스마트폰(Acode) 따라하기</h1>
+    <p class="mt-2 text-slate-600">왕초보도 가능한 초간단 가이드 · Mobile-friendly · Copy & Paste in Acode</p>
+  </header>  <main class="px-4 sm:px-6 max-w-3xl mx-auto pb-16">
+    <!-- Quick TOC -->
+    <section class="grid gap-3 sm:gap-4">
+      <div class="bg-white rounded-2xl shadow p-4">
+        <h2 class="font-semibold text-lg">빠른 메뉴 · Quick Menu</h2>
+        <div class="mt-3 grid grid-cols-2 sm:grid-cols-3 gap-2">
+          <a href="#what" class="block text-center rounded-xl border border-slate-200 py-2 hover:bg-slate-50">개요</a>
+          <a href="#phone-vs-pc" class="block text-center rounded-xl border border-slate-200 py-2 hover:bg-slate-50">폰 vs PC</a>
+          <a href="#install-pc" class="block text-center rounded-xl border border-slate-200 py-2 hover:bg-slate-50">PC 설치</a>
+          <a href="#from-phone" class="block text-center rounded-xl border border-slate-200 py-2 hover:bg-slate-50">스마트폰 활용</a>
+          <a href="#first-run" class="block text-center rounded-xl border border-slate-200 py-2 hover:bg-slate-50">첫 실행</a>
+          <a href="#examples" class="block text-center rounded-xl border border-slate-200 py-2 hover:bg-slate-50">예시/템플릿</a>
+          <a href="#safety" class="block text-center rounded-xl border border-slate-200 py-2 hover:bg-slate-50">안전/승인</a>
+          <a href="#troubleshoot" class="block text-center rounded-xl border border-slate-200 py-2 hover:bg-slate-50">문제 해결</a>
+          <a href="#glossary" class="block text-center rounded-xl border border-slate-200 py-2 hover:bg-slate-50">용어</a>
+        </div>
+      </div><!-- What -->
+  <section id="what" class="bg-white rounded-2xl shadow p-5">
+    <h2 class="text-xl font-bold">1) Open Interpreter가 무엇인가요? <span class="text-slate-400 text-base">(What is Open Interpreter?)</span></h2>
+    <p class="mt-2 leading-relaxed">Open Interpreter(오픈 인터프리터)는 <b>자연어 명령</b>을 받아 <b>Python/JS/Shell</b> 코드를 자동으로 작성하고 <b>내 컴퓨터에서 실행</b>해 주는 오픈소스 도구입니다. “이 CSV 그래프 만들어줘” 같이 말하면 알아서 코드를 만든 뒤 실행해 결과(그래프/파일/표)를 보여줍니다.</p>
+    <ul class="list-disc pl-5 mt-3 space-y-1 text-sm">
+      <li>대화형(채팅)으로 지시 → 코드 자동 생성 → 실행</li>
+      <li>로컬 실행(PC 안)이라 데이터 보안에 유리</li>
+      <li>여러 언어 지원: Python · JavaScript · Shell</li>
+    </ul>
+  </section>
+
+  <!-- Phone vs PC -->
+  <section id="phone-vs-pc" class="bg-white rounded-2xl shadow p-5">
+    <h2 class="text-xl font-bold">2) 스마트폰과 PC, 뭐가 달라요? <span class="text-slate-400 text-base">(Phone vs PC)</span></h2>
+    <p class="mt-2">현재 공식 <b>스마트폰 전용 앱</b>은 없습니다. 가장 쉬운 사용법은 <b>PC에서 설치</b>하고, 폰(Acode)으로 <b>명령 메모/파일 편집/결과 확인</b>을 도와주는 방식입니다.</p>
+    <div class="mt-3 grid sm:grid-cols-2 gap-3 text-sm">
+      <div class="rounded-xl border border-slate-200 p-3">
+        <h3 class="font-semibold">✔ 추천 흐름</h3>
+        <ol class="list-decimal pl-5 mt-1 space-y-1">
+          <li>PC에 Open Interpreter 설치/실행</li>
+          <li>폰(Acode)으로 데이터 파일 편집/업로드</li>
+          <li>필요 시 클라우드(Drive/GitHub)로 PC↔폰 동기화</li>
+          <li>결과물(이미지/CSV/리포트) 폰에서 열람</li>
+        </ol>
+      </div>
+      <div class="rounded-xl border border-slate-200 p-3">
+        <h3 class="font-semibold">💡 대안(고급)</h3>
+        <ul class="list-disc pl-5 mt-1 space-y-1">
+          <li>폰의 Termux + SSH로 집 PC에 접속해 원격 사용</li>
+          <li>클라우드 VM(무료 티어/학생 계정 등)에서 실행</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PC Install -->
+  <section id="install-pc" class="bg-white rounded-2xl shadow p-5">
+    <h2 class="text-xl font-bold">3) PC 설치 (왕초보용) <span class="text-slate-400 text-base">(Install on PC)</span></h2>
+    <div class="space-y-3 text-sm">
+      <p><b>준비물:</b> Windows/macOS/Linux PC, 인터넷, <b>Python 3.x</b> (설치 시 <span class="kbd">Add Python to PATH</span> 체크)</p>
+      <div class="rounded-xl bg-slate-50 border border-slate-200 p-3">
+        <p class="font-semibold">① 명령창 열기</p>
+        <p class="mt-1">Windows: 시작버튼 → <span class="kbd">cmd</span> 입력 → 실행</p>
+      </div>
+      <div class="rounded-xl bg-slate-50 border border-slate-200 p-3">
+        <p class="font-semibold">② 설치</p>
+        <pre class="mt-2 bg-white rounded-xl border border-slate-200 p-3"><code>pip install open-interpreter</code></pre>
+        <button class="copy btn-copy text-xs mt-2 px-2 py-1 rounded-lg border" data-copy="pip install open-interpreter">복사 Copy</button>
+      </div>
+      <div class="rounded-xl bg-slate-50 border border-slate-200 p-3">
+        <p class="font-semibold">③ 실행</p>
+        <pre class="mt-2 bg-white rounded-xl border border-slate-200 p-3"><code>interpreter</code></pre>
+        <button class="copy btn-copy text-xs mt-2 px-2 py-1 rounded-lg border" data-copy="interpreter">복사 Copy</button>
+        <p class="mt-2 text-slate-600">처음 인사말(Hello! I’m your Open Interpreter!)이 보이면 성공입니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- From Phone -->
+  <section id="from-phone" class="bg-white rounded-2xl shadow p-5">
+    <h2 class="text-xl font-bold">4) 스마트폰(Acode)로 어떻게 도울까요? <span class="text-slate-400 text-base">(Using from your phone)</span></h2>
+    <ol class="list-decimal pl-5 space-y-2 text-sm">
+      <li>Acode에서 새 파일을 만들고, CSV/텍스트/메모를 작성합니다.</li>
+      <li>클라우드(구글 드라이브/GitHub)에 업로드합니다.</li>
+      <li>PC에서 해당 파일을 받아 Open Interpreter에게 지시합니다.</li>
+      <li>생성된 결과(그래프 이미지/요약 텍스트)를 다시 클라우드로 올려 폰에서 확인합니다.</li>
+    </ol>
+    <p class="mt-2 text-slate-600">※ 고급: Termux에서 SSH 설치 후 집 PC에 원격 접속하면, 폰으로도 직접 명령을 내려 실행할 수 있습니다.</p>
+  </section>
+
+  <!-- First Run -->
+  <section id="first-run" class="bg-white rounded-2xl shadow p-5">
+    <h2 class="text-xl font-bold">5) 첫 실행에 써볼 말 <span class="text-slate-400 text-base">(Try these first)</span></h2>
+    <div class="space-y-3 text-sm">
+      <div class="rounded-xl border p-3">
+        <p class="font-semibold">예시 1 — 숫자 합계</p>
+        <pre class="mt-2 bg-slate-50 rounded-xl border p-3"><code>Please make a list of numbers 1 to 10 and calculate the sum.</code></pre>
+      </div>
+      <div class="rounded-xl border p-3">
+        <p class="font-semibold">예시 2 — 막대 그래프</p>
+        <pre class="mt-2 bg-slate-50 rounded-xl border p-3"><code>Please make a simple bar chart comparing Apple, Samsung, and Google.</code></pre>
+      </div>
+      <div class="rounded-xl border p-3">
+        <p class="font-semibold">예시 3 — CSV 요약</p>
+        <pre class="mt-2 bg-slate-50 rounded-xl border p-3"><code>Read sales.csv and show a summary table and a monthly trend chart.</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- Examples/Templates -->
+  <section id="examples" class="bg-white rounded-2xl shadow p-5">
+    <h2 class="text-xl font-bold">6) 자주 쓰는 작업 템플릿 <span class="text-slate-400 text-base">(Templates)</span></h2>
+    <div class="space-y-4 text-sm">
+      <details class="rounded-xl border p-3">
+        <summary class="cursor-pointer font-semibold">CSV → 요약 + 그래프</summary>
+        <pre class="mt-2 bg-slate-50 rounded-xl border p-3"><code>Load data from data.csv, clean missing values, show a summary (mean, median, std),
+
+and draw a line chart for the 'sales' column by month. Save the chart as sales.png.</code></pre> </details> <details class="rounded-xl border p-3"> <summary class="cursor-pointer font-semibold">폴더 이미지 일괄 리사이즈</summary> <pre class="mt-2 bg-slate-50 rounded-xl border p-3"><code>In the current folder, resize all JPG/PNG images so the longest side is 1280px, and save them into a new folder named resized/.</code></pre> </details> <details class="rounded-xl border p-3"> <summary class="cursor-pointer font-semibold">문서 요약 + 키워드 추출</summary> <pre class="mt-2 bg-slate-50 rounded-xl border p-3"><code>Summarize report.txt into 5 bullet points and extract 10 important keywords.</code></pre> </details> </div> </section>
+
+<!-- Safety -->
+  <section id="safety" class="bg-white rounded-2xl shadow p-5">
+    <h2 class="text-xl font-bold">7) 안전 · 승인 단계 <span class="text-slate-400 text-base">(Safety & Approvals)</span></h2>
+    <ul class="list-disc pl-5 space-y-1 text-sm">
+      <li>실행 전, 제안된 코드 내용이 표시됩니다. <b>승인(Yes)</b>해야 진행됩니다.</li>
+      <li>낯선 파일 삭제/이동 명령은 주의하세요. 중요한 폴더는 백업을 권장합니다.</li>
+      <li>의미가 불분명한 명령은 한국어로 자세히 설명해 달라고 요청하세요.</li>
+    </ul>
+  </section>
+
+  <!-- Troubleshoot -->
+  <section id="troubleshoot" class="bg-white rounded-2xl shadow p-5">
+    <h2 class="text-xl font-bold">8) 문제 해결 <span class="text-slate-400 text-base">(Troubleshooting)</span></h2>
+    <div class="space-y-2 text-sm">
+      <p><b>설치가 안 돼요?</b> → Python이 설치되었는지, <span class="kbd">pip</span>가 동작하는지 확인하세요.</p>
+      <p><b>interpreter 명령이 없대요?</b> → 새로 연 <span class="kbd">cmd</span> 창에서 다시 시도하거나, <span class="kbd">pip install --upgrade open-interpreter</span></p>
+      <p><b>권한 오류?</b> → 관리자 권한으로 실행하거나, 사용자 폴더 내에서 작업하세요.</p>
+      <p><b>한글 파일 경로 문제?</b> → 경로에 공백/한글이 있으면 따옴표로 감싸 주세요. (예: "C:\\내 데이터\\sales.csv")</p>
+    </div>
+  </section>
+
+  <!-- Glossary -->
+  <section id="glossary" class="bg-white rounded-2xl shadow p-5">
+    <h2 class="text-xl font-bold">9) 용어 정리 <span class="text-slate-400 text-base">(Glossary)</span></h2>
+    <ul class="list-disc pl-5 space-y-1 text-sm">
+      <li><b>CLI</b>: 명령어로 컴퓨터와 대화하는 창 (Command Line Interface)</li>
+      <li><b>로컬(Local)</b>: 내 컴퓨터 안에서 돌아가는 것</li>
+      <li><b>SSH</b>: 다른 컴퓨터(집 PC 등)에 원격으로 접속하는 방법</li>
+    </ul>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center text-xs text-slate-500 pt-4">
+    Made for Acode · TailwindCSS · © 2025
+  </footer>
+</section>
+
+  </main>  <script>
+    // Copy buttons
+    document.querySelectorAll('.btn-copy').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const text = btn.getAttribute('data-copy');
+        try{ await navigator.clipboard.writeText(text); btn.textContent='복사됨 ✓'; setTimeout(()=>btn.textContent='복사 Copy',1200);}catch(e){ alert('복사 실패: '+e)}
+      });
+    });
+  </script></body>
+</html>
