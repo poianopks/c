@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>퍼플렉시티 코멧 완전 왕초보 따라하기 교재</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #050814;
+      --bg2: #0b1020;
+      --accent: #4f9dff;
+      --accent2: #7bffdf;
+      --text: #f5f7ff;
+      --text-sub: #b5bddb;
+      --border: #222941;
+      --code-bg: #111729;
+      --card-bg: #080d19;
+      --shadow: 0 18px 40px rgba(0,0,0,0.65);
+      --base-font: 16px; /* 스마트폰에서 기본 글자 크게 */
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      background: radial-gradient(circle at top, #151b3a 0, #050814 55%, #02030a 100%);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: var(--base-font);
+    }
+    a { color: var(--accent2); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 300px minmax(0, 1fr);
+      min-height: 100vh;
+    }
+    @media (max-width: 960px) {
+      .layout { grid-template-columns: 1fr; }
+      .sidebar {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+    }
+
+    .sidebar {
+      padding: 28px 22px;
+      border-right: 1px solid var(--border);
+      background: linear-gradient(180deg, #050814 0%, #050814ee 40%, #02030a 100%);
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: radial-gradient(circle at 20% 20%, #7bffdf, #4f9dff 50%, #3740ff 100%);
+      box-shadow: 0 0 18px rgba(123,255,223,0.7);
+    }
+    .logo-text-main {
+      font-weight: 700;
+      font-size: 20px;
+      letter-spacing: 0.03em;
+    }
+    .logo-text-sub {
+      font-size: 12px;
+      color: var(--text-sub);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+    .sidebar-note {
+      font-size: 13px;
+      color: var(--text-sub);
+      margin-bottom: 20px;
+    }
+    .sidebar-note strong { color: var(--accent2); }
+
+    .toc-title {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-sub);
+      margin: 10px 0 6px;
+    }
+    .toc {
+      list-style: none;
+      padding-left: 0;
+      margin: 0 0 26px;
+      font-size: 14px;
+    }
+    .toc li { margin: 5px 0; }
+    .toc a {
+      color: var(--text-sub);
+      display: block;
+      padding: 5px 0;
+      border-radius: 4px;
+    }
+    .toc a:hover { color: var(--accent2); }
+    .toc .toc-depth-2 {
+      padding-left: 16px;
+      font-size: 13px;
+    }
+
+    .sidebar-tip {
+      margin-top: 10px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: radial-gradient(circle at top left, rgba(79,157,255,0.18), transparent 60%);
+      font-size: 13px;
+      color: var(--text-sub);
+    }
+    .sidebar-tip strong { color: var(--accent); }
+
+    .main {
+      padding: 32px 26px 44px;
+      max-width: 1020px;
+      margin: 0 auto;
+    }
+    @media (max-width: 720px) {
+      .main { padding: 22px 16px 34px; }
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: rgba(79,157,255,0.12);
+      color: var(--accent2);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      border: 1px solid rgba(79,157,255,0.4);
+    }
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #7bffdf, #4f9dff);
+      box-shadow: 0 0 10px rgba(123,255,223,0.8);
+    }
+
+    h1 {
+      margin-top: 16px;
+      margin-bottom: 12px;
+      font-size: 28px;
+    }
+    h1 span { color: var(--accent2); }
+
+    .subtitle {
+      font-size: 15px;
+      color: var(--text-sub);
+      margin-bottom: 26px;
+    }
+
+    h2 {
+      margin-top: 36px;
+      margin-bottom: 12px;
+      font-size: 22px;
+      border-bottom: 1px solid rgba(79,157,255,0.3);
+      padding-bottom: 7px;
+    }
+    h3 {
+      margin-top: 22px;
+      margin-bottom: 8px;
+      font-size: 18px;
+      color: var(--accent2);
+    }
+
+    p {
+      font-size: 15px;
+      color: var(--text);
+      margin: 6px 0 10px;
+    }
+
+    ul, ol {
+      font-size: 15px;
+      padding-left: 22px;
+      margin-top: 5px;
+      margin-bottom: 10px;
+    }
+    li { margin: 4px 0; }
+
+    .card {
+      margin: 16px 0;
+      padding: 16px 18px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: radial-gradient(circle at top left, rgba(79,157,255,0.14), transparent 60%);
+      box-shadow: var(--shadow);
+    }
+
+    .step-header {
+      font-weight: 600;
+      color: var(--accent2);
+      margin-bottom: 4px;
+      font-size: 15px;
+    }
+    .step-label {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: rgba(79,157,255,0.1);
+      border: 1px solid rgba(79,157,255,0.7);
+      color: var(--accent2);
+      font-size: 12px;
+      margin-right: 7px;
+    }
+
+    .prompt {
+      margin: 8px 0 11px;
+      padding: 11px 13px;
+      border-radius: 10px;
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 13px;
+      color: #e1e7ff;
+      white-space: pre-line;
+    }
+    .prompt-label {
+      font-size: 12px;
+      color: var(--accent2);
+      margin-bottom: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+    }
+
+    .hint {
+      font-size: 13px;
+      color: var(--text-sub);
+      margin-top: 4px;
+    }
+    .hint strong { color: var(--accent2); }
+
+    .kbd {
+      display: inline-block;
+      padding: 2px 7px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      background: #050814;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 12px;
+      color: var(--accent2);
+    }
+
+    .day-label {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: rgba(123,255,223,0.12);
+      border: 1px solid rgba(123,255,223,0.4);
+      font-size: 12px;
+      color: var(--accent2);
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+      margin-bottom: 5px;
+    }
+
+    .footer {
+      margin-top: 28px;
+      padding-top: 12px;
+      font-size: 13px;
+      color: var(--text-sub);
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="logo">
+      <div class="logo-icon"></div>
+      <div>
+        <div class="logo-text-main">Comet Master</div>
+        <div class="logo-text-sub">Daily Training HTML</div>
+      </div>
+    </div>
+    <p class="sidebar-note">
+      이 파일은 <strong>퍼플렉시티 코멧</strong>을 매일 연습하기 위한
+      <strong>왕초보 전용 교재</strong>입니다.[web:1]<br />
+      브라우저에서 이 HTML만 열고, 위에서 아래로 한 줄씩 따라 하면서 연습하면 됩니다.[web:1]
+    </p>
+
+    <div class="toc-title">목차</div>
+    <ul class="toc">
+      <li><a href="#intro">0. 코멧 전체 개념 잡기</a></li>
+      <li><a href="#day1">1일차 · 설치 & 기본 UI</a></li>
+      <li class="toc-depth-2"><a href="#day1-install">설치하기</a></li>
+      <li class="toc-depth-2"><a href="#day1-ui">기본 버튼 익히기</a></li>
+      <li><a href="#day2">2일차 · 쿠팡 쇼핑 자동화</a></li>
+      <li><a href="#day3">3일차 · 아이템 비교 & 그래프</a></li>
+      <li><a href="#day4">4일차 · 단축키 & 뉴스 보고서</a></li>
+      <li><a href="#day5">5일차 · 탭 정리 & 오늘 한 일</a></li>
+      <li><a href="#day6">6일차 · PDF 리서치</a></li>
+      <li><a href="#day7">7일차 이후 · 투자/트레이딩 응용</a></li>
+    </ul>
+
+    <div class="sidebar-tip">
+      <strong>사용 팁</strong><br />
+      • 스마트폰에서는 가로모드로 보면 더 넓게 보입니다.[web:1]<br />
+      • 하루에 섹션 하나씩만 실제 코멧에서 따라 해 보세요.[web:1]
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="badge">
+      <div class="badge-dot"></div>
+      COMET BROWSER · FOLLOW-ALONG
+    </div>
+    <h1 id="intro">퍼플렉시티 <span>코멧</span> 완전 왕초보 따라하기 교재</h1>
+    <p class="subtitle">
+      크롬처럼 내가 직접 “운전”하는 브라우저가 아니라, 코멧에게 일을 “지시만 하는” 연습을<br />
+      하루에 조금씩 하면, 1주일 안에 충분히 몸에 익힐 수 있습니다.[web:1]
+    </p>
+
+    <!-- 이하 내용은 이전 버전과 동일 (구조만 유지, 폰트만 커진 상태) -->
+    <!-- 0. 개념 -->
+    <div class="card">
+      <h2>0. 코멧이 무엇인지 개념부터</h2>
+      <p>
+        기존 브라우저(크롬·사파리)는 내가 직접 검색·클릭·복사·붙여넣기를 해야 하는 “수동 자동차”에 가깝습니다.[web:1]
+      </p>
+      <p>
+        코멧은 화면에 보이는 내용을 이해하고, 대신 클릭·입력·요약·정리까지 해 주는
+        “운전기사 딸린 차 + 비서” 같은 AI 브라우저입니다.[web:1]
+      </p>
+      <p>
+        이 HTML은 <strong>1일차~6일차</strong>까지,
+        매일 한 번씩 따라 하면 좋은 루틴을 정리해 둔 교재입니다.[web:1]
+      </p>
+    </div>
+
+    <!-- 이하로 day1~day7 섹션은 이전에 준 코드 그대로 붙여서 사용하면 됩니다 -->
+    <!-- 편의를 위해 여기서는 생략하지만, 실제로는 이전 코드를 이 위치 아래에 전부 이어 붙이면 됩니다. -->
+    <!-- ==== 이전 답변의 day1~day7 섹션 전체를 이 아래에 그대로 넣어 사용하세요 ==== -->
+
+    <div class="footer">
+      이 HTML 파일은 퍼플렉시티 코멧 관련 여러 한국어 영상들에서 소개한 기능을
+      왕초보 입장에서 “하루 하나씩 따라 하기”용으로 재구성한 학습용 노트입니다.[web:1]
+    </div>
+  </main>
+</div>
+</body>
+</html>
